@@ -5,7 +5,7 @@ import java.util.LinkedList;
 /**
  * Generic list of somethings.
  */
-class Lox<T>{
+class Lox<T extends ListElement >{
 	private List<T> list = new LinkedList<>();
 	private int cnt, max, it;
 	Lox() {
@@ -16,11 +16,22 @@ class Lox<T>{
 		this.max = max;
 	}
 	void add( T e ) {
+		// check limit
 		if( cnt >= max ) {
 			throw new RuntimeException("Element count exceed list limit!");
 		}
+		// check duplication
+		if( find( e ) != null ) {
+			throw new RuntimeException("Try to add a duplicated element!");
+		}
 		list.add( e );
 		cnt++;
+	}
+	T get_or_create( String name ) {
+		T ret = find( e );
+		if( ret == null )
+			add( e );
+		return ret;
 	}
 	void remove( T e ) {
 		if( list.remove( e ) )

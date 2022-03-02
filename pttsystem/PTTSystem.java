@@ -2,9 +2,14 @@ package pttsystem;
 /**
  * This class is the main part-time teacher system.
  * It uses singleton pattern so that only one system will exist.
+ * All lists are accessible for pttsystem packages for class clustering.
  */
 @SuppressWarnings("unchecked")
 public class PTTSystem {
+	protected Lox<Staff> lost;
+	protected Lox<Skill> losk;
+	protected Lox<Training> lotr;
+	protected Lox<Requirement> lorq;
 	// singleton components
 	private static PTTSystem ptt = new PTTSystem();
 	private PTTSystem() {
@@ -30,11 +35,16 @@ public class PTTSystem {
 		lb.large();
 		lorq = (Lox<Requirement>)lb.getResult();
 	}
-	public PTTSystem inst() {
+	public static PTTSystem inst() {
 		return ptt;
 	}
-	private Lox<Staff> lost;
-	private Lox<Skill> losk;
-	private Lox<Training> lotr;
-	private Lox<Requirement> lorq;
+	// STORYCARD: Add requirement and its skills and training
+	public void addReq( String reqName, String[] skillNames, String[] trainingNames ) {
+		Requirement req = new Requirement( reqName );
+		// add all skills
+		for( String s : skillNames ) {
+			Skill sk = losk.get_or_create( new Skill( s ) );
+			
+		}
+	}
 }
