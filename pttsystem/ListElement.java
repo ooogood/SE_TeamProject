@@ -1,6 +1,7 @@
 package pttsystem;
 /**
- * This is an abstract class that all the data in the Lox should extends
+ * This is an abstract class that all the data in the Lox should extends.
+ * Invariant: Elements in this list should have a primary key "name(String)"
  */
 
 abstract public class ListElement {

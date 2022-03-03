@@ -4,13 +4,18 @@ import java.util.List;
 import java.util.LinkedList;
 /**
  * Generic list of somethings.
+ * Invariant: Elements in this list should have a primary key "name(String)"
  */
-class Lox<T extends ListElement >{
+class Lox<T extends ListElement>{
+	private ElemFactory<T> factory;
 	private List<T> list = new LinkedList<>();
 	private int cnt, max, it;
-	Lox() {
+	Lox( Class<T> clz ) {
 		cnt = 0;
 		it = 0;
+	}
+	void setFactory( ElemFactory<T> fact ) {
+		factory = fact;
 	}
 	void setMax( int max ) {
 		this.max = max;
@@ -28,9 +33,11 @@ class Lox<T extends ListElement >{
 		cnt++;
 	}
 	T get_or_create( String name ) {
-		T ret = find( e );
-		if( ret == null )
-			add( e );
+		T ret = find( name );
+		if( ret == null ) {
+			ret = factory.create( name );
+			add( ret );
+		}
 		return ret;
 	}
 	void remove( T e ) {
@@ -38,8 +45,11 @@ class Lox<T extends ListElement >{
 			cnt--;
 	}
 	T find( T e ) {
+		return find( e.getName() );
+	}
+	T find( String name ) {
 		for( T t : list ) {
-			if( e.equals( t ) )
+			if( name.equals( t.getName() ) )
 				return t;
 		}
 		return null;

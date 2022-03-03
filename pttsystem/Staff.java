@@ -1,65 +1,56 @@
 package pttsystem;
 
 @SuppressWarnings("unchecked")
-public class Staff {
-	private String name;
+public class Staff extends ListElement{
 	private Lox<Skill> skills;
 	private Lox<Training> trainings;
-	private boolean hasJob = false;
+	private Requirement job;
 	public Staff( String name ) {
-		this( name, false );
-	}
-	public Staff( String name, boolean hasJob ) {
-		this.name = name;
-		this.hasJob = hasJob;
+		super( name );
 
 		ListBuilder lb = ListBuilder.inst();
 		// create list of skills
 		lb.reset();
-		lb.<Skill>setElement();
+		lb.setElement( Skill.class );
 		lb.small();
 		skills = lb.getResult();
 		// create list of training
 		lb.reset();
-		lb.<Training>setElement();
+		lb.setElement( Training.class );
 		lb.small();
 		trainings = lb.getResult();
 	}
+	// basic get & set methods 
+	public Lox<Skill> getSkills() {
+		return skills;
+	}
+	public Lox<Training> getTrainings() {
+		return trainings;
+	}
+	public Requirement getJob() {
+		return this.job;
+	}
+	public void setJob( Requirement job ) {
+		this.job = job;
+	}
+	public boolean hasJob() {
+		return ( job != null );
+	}
 	// add skill
-	public void addSkill( Skill sk ) {
-		PTTSystem ptt = PTTSystem.inst();
-		// save the skill instance inside the pttsystem list
-		Skill s = ptt.losk.get_or_create( sk );
-		skills.add( s );
+	public void addSkill( String skName ) {
+		skills.get_or_create( skName );
 	}
 	// add training
-	public void addTraining( Training tr ) {
-		PTTSystem ptt = PTTSystem.inst();
-		// save the skill instance inside the pttsystem list
-		Training t = ptt.lotr.get_or_create( tr );
-		trainings.add( t );
+	public void addTraining( String trName ) {
+		trainings.get_or_create( trName );
 	}
-	// get & set hasJob
-	public boolean hasJob() {
-		return hasJob;
-	}
-	public void setHasJob( boolean h ) {
-		this.hasJob = h;
-	}
-	// check if the staff has this skill
+	// Check if the staff has this skill.
 	public boolean hasSkill( Skill sk ) {
 		skills.reset();
 		while( skills.hasNext() ) {
 			if( skills.next().equals( sk ) )
 				return true;
 		}
-		return false;
-	}
-	@Override
-	public boolean equals( Object st ) {
-		if( !( st instanceof Staff ) ) return false;
-		if( this.name.equals( ((Staff)st).name ) )
-			return true;
 		return false;
 	}
 }
