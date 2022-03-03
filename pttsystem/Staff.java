@@ -46,9 +46,9 @@ public class Staff extends ListElement{
 	}
 	// Check if the staff has this skill.
 	public boolean hasSkill( Skill sk ) {
-		skills.reset();
-		while( skills.hasNext() ) {
-			if( skills.next().equals( sk ) )
+		Lox<Skill>.Iterator it = skills.getIter();
+		while( it.hasNext() ) {
+			if( it.next().equals( sk ) )
 				return true;
 		}
 		return false;

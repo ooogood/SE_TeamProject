@@ -7,18 +7,35 @@ import java.util.LinkedList;
  * Invariant: Elements in this list should have a primary key "name(String)"
  */
 class Lox<T extends ListElement>{
+	public class Iterator {
+		int it = 0;
+		/**
+		 * Iteration functions
+		 */
+		public void reset() {
+			it = 0;
+		}
+		public T next() {
+			return (it == cnt) ? null : list.get( it++ );
+		}
+		public boolean hasNext() {
+			return it < cnt;
+		}
+	}
 	private ElemFactory<T> factory;
 	private List<T> list = new LinkedList<>();
-	private int cnt, max, it;
+	private int cnt, max;
 	Lox( Class<T> clz ) {
 		cnt = 0;
-		it = 0;
 	}
 	void setFactory( ElemFactory<T> fact ) {
 		factory = fact;
 	}
 	void setMax( int max ) {
 		this.max = max;
+	}
+	int getMax() {
+		return this.max;
 	}
 	void add( T e ) {
 		// check limit
@@ -40,6 +57,9 @@ class Lox<T extends ListElement>{
 		}
 		return ret;
 	}
+	// T get( int idx ) {
+	// 	return list.get( idx );
+	// }
 	void remove( T e ) {
 		if( list.remove( e ) )
 			cnt--;
@@ -54,16 +74,7 @@ class Lox<T extends ListElement>{
 		}
 		return null;
 	}
-	/**
-	 * Iteration functions
-	 */
-	public void reset() {
-		it = 0;
-	}
-	public T next() {
-		return (it == cnt) ? null : list.get( it++ );
-	}
-	public boolean hasNext() {
-		return it < cnt;
+	Iterator getIter() {
+		return new Iterator();
 	}
 }

@@ -52,17 +52,17 @@ public class Requirement extends ListElement{
 		teacher = st;
 		st.setJob( this );
 		// put all required training of this requirement into the staff
-		trainings.reset();
-		while( trainings.hasNext() ) {
-			st.addTraining( trainings.next().getName() );
+		Lox<Training>.Iterator it = trainings.getIter();
+		while( it.hasNext() ) {
+			st.addTraining( it.next().getName() );
 		}
 	}
 	// check if a staff is suitable for the requirement 
 	// STORYCARD: Check if a staff is suitable for the requirement
 	public boolean isSuitable( Staff st ) {
-		skills.reset();
-		while( skills.hasNext() ) {
-			if( !st.hasSkill( skills.next() ) )
+		Lox<Skill>.Iterator it = skills.getIter();
+		while( it.hasNext() ) {
+			if( !st.hasSkill( it.next() ) )
 				return false;
 		}
 		return true;

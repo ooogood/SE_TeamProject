@@ -18,15 +18,15 @@ public class PTTSystem extends SRManagement {
 	}
 	// STORYCARD: fill all requirements with existing staffs
 	public void tryFillAllReq() {
-		lorq.reset();
-		while( lorq.hasNext() ) {
-			Requirement req = lorq.next();
+		Lox<Requirement>.Iterator rqIt = lorq.getIter();
+		while( rqIt.hasNext() ) {
+			Requirement req = rqIt.next();
 			if( req.hasFilled() ) continue;
 
 			// try to find a staff to fill the requirement
-			lost.reset();
-			while( lost.hasNext() ) {
-				Staff st = lost.next();
+			Lox<Staff>.Iterator stIt = lost.getIter();
+			while( stIt.hasNext() ) {
+				Staff st = stIt.next();
 				if( st.hasJob() ) continue;
 				if( req.isSuitable( st ) ) {
 					// found a suitable staff
@@ -45,14 +45,14 @@ public class PTTSystem extends SRManagement {
 		PTTSaver sv = slfactory.getSaver();
 		sv.startSaving();
 		// saving all staffs
-		lost.reset();
-		while( lost.hasNext() ) {
-			sv.saveStaff( lost.next() );
+		Lox<Staff>.Iterator stIt = lost.getIter();
+		while( stIt.hasNext() ) {
+			sv.saveStaff( stIt.next() );
 		}
 		// saving all requirements
-		lorq.reset();
-		while( lorq.hasNext() ) {
-			sv.saveRequirement( lorq.next() );
+		Lox<Requirement>.Iterator rqIt = lorq.getIter();
+		while( rqIt.hasNext() ) {
+			sv.saveRequirement( rqIt.next() );
 		}
 		sv.endSaving();
 	}
