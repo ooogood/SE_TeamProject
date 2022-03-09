@@ -19,4 +19,7 @@ abstract public class ListElement {
 			return true;
 		return false;
 	}
+	public String toString(){
+		return this.name;
+	}
 }

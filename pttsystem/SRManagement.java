@@ -55,4 +55,19 @@ public class SRManagement {
 	public void addStaff( Staff st ) {
 		lost.add( st );
 	}
+
+	//TODO: @override toString
+	public String toString(){
+		return "[ Staff ]:\n" + 
+				String.format( "| %-16s |", "Staff Name" ) +
+				String.format( " %-16s |","Skills" ) +
+				String.format( " %-16s |\n","Job" ) +
+				lost.toString() +
+				"\n[ Requirement ]:\n" +
+				String.format( "| %-16s |", "Requirement Name" ) +
+				String.format( " %-16s |","Staff" ) +
+				String.format( " %-16s |","Skills Needed" ) +
+				String.format( " %-16s |\n","Trainging Needed" ) +
+				lorq.toString();
+	}
 }

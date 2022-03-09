@@ -53,4 +53,14 @@ public class Staff extends ListElement{
 		}
 		return false;
 	}
+	//TODO: @override toString
+	public String toString(){
+		
+		String j = job==null? "null": job.getName();
+		String out = String.format("| %-16s |", this.name )
+					+ String.format(" %-16s |", skills )
+					+ String.format(" %-16s |\n", j );
+					
+		return out;
+	}
 }

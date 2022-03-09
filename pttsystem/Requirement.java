@@ -67,4 +67,15 @@ public class Requirement extends ListElement{
 		}
 		return true;
 	}
+	//TODO: @override toString
+	public String toString(){
+
+		String t = teacher==null? "null" : teacher.getName(); 
+		String out = String.format("| %-16s |", this.name )
+		+ String.format(" %-16s |", t )
+		+ String.format(" %-16s |", skills )
+		+ String.format(" %-16s |\n", trainings );
+
+		return out;
+	}
 }
