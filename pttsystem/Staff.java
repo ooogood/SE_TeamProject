@@ -53,13 +53,13 @@ public class Staff extends ListElement{
 		}
 		return false;
 	}
-	//TODO: @override toString
-	public String toString(){
+	public String print(){
 		
 		String j = job==null? "null": job.getName();
 		String out = String.format("| %-16s |", this.name )
-					+ String.format(" %-16s |", skills )
-					+ String.format(" %-16s |\n", j );
+					+ String.format(" %-16s |", j )
+					+ String.format(" %-16s |", skills.print(',') )
+					+ String.format(" %-16s |", trainings.print(',') );
 					
 		return out;
 	}

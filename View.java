@@ -16,15 +16,16 @@ public class View {
     }
 
     public void getInfo(){
-        while( true ){
-
+        boolean end = false;
+        while( !end ){
             System.out.println( "Please input the number to represent the service you want:\n" + 
                                 "0 = Input a list of teaching requirements\n" +
                                 "1 = Input a list of staff\n" +
                                 "2 = Match the requirements and staff\n" +
-                                "3 = Show the data" );
+                                "3 = Show the data\n"+
+                                "4 = Save and end the system" );
             
-            controller.process( Integer.parseInt( sc.nextLine() ) );
+            end = controller.process( Integer.parseInt( sc.nextLine() ) );
         }
     }
 
@@ -75,7 +76,10 @@ public class View {
     }
 
     public void showDataBase(){
-        
-        System.out.println( ptt.toString() );
+        System.out.println( ptt );
+    }
+
+    public void showErrorInput( int i ) {
+        System.out.println( i + " is not a valid input!" );
     }
 }

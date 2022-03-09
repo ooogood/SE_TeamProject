@@ -56,18 +56,21 @@ public class SRManagement {
 		lost.add( st );
 	}
 
-	//TODO: @override toString
+	@Override
 	public String toString(){
+				// print staff header
 		return "[ Staff ]:\n" + 
 				String.format( "| %-16s |", "Staff Name" ) +
+				String.format( " %-16s |", "Job Name" ) +
 				String.format( " %-16s |","Skills" ) +
 				String.format( " %-16s |\n","Job" ) +
-				lost.toString() +
+				lost.print('\n') +
+				// print requirement header
 				"\n[ Requirement ]:\n" +
 				String.format( "| %-16s |", "Requirement Name" ) +
-				String.format( " %-16s |","Staff" ) +
+				String.format( " %-16s |","Teacher Name" ) +
 				String.format( " %-16s |","Skills Needed" ) +
 				String.format( " %-16s |\n","Trainging Needed" ) +
-				lorq.toString();
+				lorq.print('\n');
 	}
 }

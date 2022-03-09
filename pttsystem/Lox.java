@@ -78,14 +78,12 @@ class Lox<T extends ListElement>{
 		return new Iterator();
 	}
 
-	//TODO: @override toString
-	public String toString(){
+	public String print( char delimiter ){
 		String out = "";
 		Iterator it = this.getIter();
 		while( it.hasNext() ) {
-			out += it.next().toString()+",";
+			out += it.next().print() + delimiter;
 		}
-		String outNew = out.replaceAll(",$", "");
-		return outNew;
+		return out;
 	}
 }

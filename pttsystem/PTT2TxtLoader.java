@@ -15,21 +15,16 @@ import java.util.regex.Pattern;
  */
 
 public class PTT2TxtLoader extends SRManagement implements PTTLoader {
-
+	String filename = "data.txt";
 	BufferedReader objReader;
 
 	public void startLoading() {
-		// TODO
-		// read txt file and store all staffs and requirements in this method
-		// store them in lost and lorq in SRManagement!
-		//Get file
 		try {
-			FileReader file = new FileReader("data.txt");
+			FileReader file = new FileReader(filename);
 			objReader = new BufferedReader(file);
-
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			// not reading anything
+			return;
 		}
 
 		//Read file
@@ -60,7 +55,6 @@ public class PTT2TxtLoader extends SRManagement implements PTTLoader {
 				}
 			}
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
 			try {

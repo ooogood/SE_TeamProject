@@ -2,6 +2,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import pttsystem.PTTSystem;
+import pttsystem.PTT2TxtKit;
 
 public class Controller {
     
@@ -15,23 +16,35 @@ public class Controller {
     }
 
     public void systemStart(){
+		ptt.setSLFactory( new PTT2TxtKit() );
+		ptt.loadSystem();
         view.getInfo();
     }
+    public void systemEnd() {
+        ptt.saveSystem();
+    }
 
-    public void process( int service ){
+    // return if the system is ending
+    public boolean process( int service ){
         switch( service ){
             case 0:
                 inputRequirements();
-                break;
+                return false;
             case 1:
                 inputStaff();
-                break;
+                return false;
             case 2:
                 matchReqAndStafff();
-                break;
+                return false;
             case 3:
                 outputDataBase();
+                return false;
+            case 4:
+                systemEnd();
+                return true;
             }
+        view.showErrorInput( service );
+        return false;
     }
 
     public void inputRequirements(){
