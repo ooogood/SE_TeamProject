@@ -1,8 +1,10 @@
+import pttsystem.PTT2TxtKit;
 import pttsystem.PTTSystem;
 
 public class Main {
 	public static void main( String args[] ) {
 		PTTSystem ptt = PTTSystem.inst();
+		ptt.setSLFactory( new PTT2TxtKit() );
 		ptt.addReq("English Class",
 					new String[]{"English", "Language Teaching"},
 					new String[]{ "English Class Training"} );
@@ -28,5 +30,6 @@ public class Main {
 					new String[]{"Calculus", "Math Teaching"},
 					new String[]{} );
 		ptt.tryFillAllReq();
+		ptt.saveSystem();
 	}
 }

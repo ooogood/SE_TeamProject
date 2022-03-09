@@ -4,130 +4,92 @@ import java.io.IOException;
 import java.io.BufferedWriter;
 
 public class PTT2TxtSaver implements PTTSaver {
-
-	String data = "Placeholder";
-	FileWriter file;
+	String filename = "FileName.txt";
+	FileWriter fw;
 	BufferedWriter output;
-
+	boolean bSavingStaff = true;
+	// open a txt file to write
 	public void startSaving() {
-
 		try {
-			file = new FileWriter("fileName.txt");
-			output =new BufferedWriter(file);
+			fw = new FileWriter(filename);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
-
+	// save a staff object
 	public void saveStaff( Staff st ) {
-		String s = st.getName();
 		try {
-		output.write(s, 0, s.length());
-		output.write(" ");
+			// new line if change saving item type
+			if( !bSavingStaff ) {
+				fw.write("\n");
+				bSavingStaff = true;
+			}
+			// 1. save name
+			String s = st.getName();
+			fw.write(s, 0, s.length());
+			fw.write(",");
+			// 2. save job name
+			Requirement y = st.getJob();
+			if(y != null) {
+				fw.write(y.getName(), 0, y.getName().length());
+			}
+			fw.write(",{");
+			// 3. save all skills
+			Lox<Skill>.Iterator skIt = st.getSkills().getIter();
+			while (skIt.hasNext()) {
+				fw.write(skIt.next().getName());
+				fw.write(",");
+			}
+			fw.write("},{");
+			// 4. save all trainings
+			Lox<Training>.Iterator trIt = st.getTrainings().getIter();
+			while (trIt.hasNext()) {
+				fw.write(trIt.next().getName());
+				fw.write(",");
+			}
+			fw.write("}\n");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-	
-		Requirement y = st.getJob();
-
-		try {
-			if(y == null) {
-				output.write("null", 0, 4);
-			} else {
-				output.write(y.getName(), 0, y.getName().length());
-			}
-			output.write(" ");
-		}catch (IOException e) {
-			e.printStackTrace();
-		}
-
-		Lox<Skill> x = st.getSkills();
-
-		try {
-			
-		Lox<Skill>.Iterator it = x.getIter();
-		while (it.hasNext()) {
-			output.write(it.next().getName());
-			output.write(",");
-			}
-
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
-		Lox<Training> t = st.getTrainings();
-
-		try {
-			output.write(" ");
-		Lox<Training>.Iterator it = t.getIter();
-		while (it.hasNext()) {
-			output.write(it.next().getName());
-			output.write(",");
-			}
-		
-		output.write("/n");
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
 	}
 	public void saveRequirement( Requirement req ) {
-
-		String r = req.getName();
 		try {
-			output.write(r, 0, r.length());
-			output.write(" ");
+			// new line if change saving item type
+			if( bSavingStaff ) {
+				fw.write("\n");
+				bSavingStaff = false;
+			}
+			// 1. save the requirement name
+			String r = req.getName();
+			fw.write(r, 0, r.length());
+			fw.write(",");
+			// 2. save the teacher's name
+			Staff z = req.getTeacher();
+			if(z != null) {
+				fw.write(z.getName(), 0, z.getName().length());
+			} 
+			fw.write(",{");
+			// 3. save all required skills
+			Lox<Skill>.Iterator rqIt = req.getSkills().getIter();
+			while (rqIt.hasNext()) {
+				fw.write(rqIt.next().getName());
+				fw.write(",");
+			}
+			fw.write("},{");
+			// 4. save all required trainings
+			Lox<Training>.Iterator trIt = req.getTrainings().getIter();
+			while (trIt.hasNext()) {
+				fw.write(trIt.next().getName());
+				fw.write(",");
+			}
+			fw.write("}\n");
 		}catch (IOException e) {
 			e.printStackTrace();
 		}
-
-		Staff z = req.getTeacher();
-
-		try {
-			if(z == null) {
-				output.write("null", 0, 4);
-			} else {
-				output.write(z.getName(), 0, z.getName().length());
-			} 
-			output.write(" ");
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
-		Lox<Skill> a = req.getSkills();
-
-		try {
-			
-		Lox<Skill>.Iterator it = a.getIter();
-		while (it.hasNext()) {
-			output.write(it.next().getName());
-			output.write(",");
-			}
-
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
-		Lox<Training> b = req.getTrainings();
-
-		try {
-			output.write(" ");
-		Lox<Training>.Iterator it = b.getIter();
-		while (it.hasNext()) {
-			output.write(it.next().getName());
-			output.write(",");
-			}
-		
-		output.write("/n");
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
 	}
 	public void endSaving() {
 		try {
-			file.close();
-			output.close();
+			fw.close();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
