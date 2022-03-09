@@ -81,7 +81,8 @@ public class PTT2TxtLoader extends SRManagement implements PTTLoader {
 
 	public void endLoading() {
 		try {
-			objReader.close();
+			if( objReader != null)
+				objReader.close();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
