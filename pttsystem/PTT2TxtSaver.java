@@ -15,9 +15,9 @@ public class PTT2TxtSaver implements PTTSaver {
 			file = new FileWriter("fileName.txt");
 			output =new BufferedWriter(file);
 		} catch (IOException e) {
+			e.printStackTrace();
 		}
 	}
-
 
 	public void saveStaff( Staff st ) {
 		String s = st.getName();
@@ -25,7 +25,7 @@ public class PTT2TxtSaver implements PTTSaver {
 		output.write(s, 0, s.length());
 		output.write(" ");
 		} catch (IOException e) {
-
+			e.printStackTrace();
 		}
 	
 		Requirement y = st.getJob();
@@ -38,7 +38,7 @@ public class PTT2TxtSaver implements PTTSaver {
 			}
 			output.write(" ");
 		}catch (IOException e) {
-
+			e.printStackTrace();
 		}
 
 		Lox<Skill> x = st.getSkills();
@@ -52,7 +52,7 @@ public class PTT2TxtSaver implements PTTSaver {
 			}
 
 		} catch (IOException e) {
-
+			e.printStackTrace();
 		}
 
 		Lox<Training> t = st.getTrainings();
@@ -67,13 +67,9 @@ public class PTT2TxtSaver implements PTTSaver {
 		
 		output.write("/n");
 		} catch (IOException e) {
-
+			e.printStackTrace();
 		}
 
-		
-		// TODO
-		// save the staff as one line: 
-		//  "staffName jobName sk1,sk2,... tr1,tr2,..."
 	}
 	public void saveRequirement( Requirement req ) {
 
@@ -82,7 +78,7 @@ public class PTT2TxtSaver implements PTTSaver {
 			output.write(r, 0, r.length());
 			output.write(" ");
 		}catch (IOException e) {
-
+			e.printStackTrace();
 		}
 
 		Staff z = req.getTeacher();
@@ -95,7 +91,7 @@ public class PTT2TxtSaver implements PTTSaver {
 			} 
 			output.write(" ");
 		} catch (IOException e) {
-
+			e.printStackTrace();
 		}
 
 		Lox<Skill> a = req.getSkills();
@@ -109,7 +105,7 @@ public class PTT2TxtSaver implements PTTSaver {
 			}
 
 		} catch (IOException e) {
-
+			e.printStackTrace();
 		}
 
 		Lox<Training> b = req.getTrainings();
@@ -124,32 +120,17 @@ public class PTT2TxtSaver implements PTTSaver {
 		
 		output.write("/n");
 		} catch (IOException e) {
-
+			e.printStackTrace();
 		}
 
-
-
-
-		// TODO
-		// save the requirement as one line: 
-		//  "reqName teacherName sk1,sk2,... tr1,tr2,..."
-
-	
-	
 	}
 	public void endSaving() {
 		try {
 			file.close();
 			output.close();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 }
 
-//we need to safe the staff and the requirement
-//Each staff and each requirement is a line thaconvert to list of string and put it in the file that was opened. 
-//bufferwriter to open a file in the startSaving 
-//closing means you close the open file in endSaving
-//lab 3.1
