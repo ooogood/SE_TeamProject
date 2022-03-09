@@ -73,7 +73,7 @@ public class Requirement extends ListElement{
 		String out = String.format("| %-16s |", this.name )
 		+ String.format(" %-16s |", t )
 		+ String.format(" %-16s |", skills.print(',') )
-		+ String.format(" %-16s |\n", trainings.print(',') );
+		+ String.format(" %-16s |", trainings.print(',') );
 
 		return out;
 	}

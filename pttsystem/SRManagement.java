@@ -24,7 +24,7 @@ public class SRManagement {
 		lorq = (Lox<Requirement>)lb.getResult();
 	}
 	// STORYCARD: Add a requirement and its skills and training
-	public void addReq( String reqName, String[] skillNames, String[] trainingNames ) {
+	public Requirement addReq( String reqName, String[] skillNames, String[] trainingNames ) {
 		Requirement req = lorq.get_or_create( reqName );
 		// add all skills
 		for( String s : skillNames ) {
@@ -34,13 +34,15 @@ public class SRManagement {
 		for( String t : trainingNames ) {
 			req.addTraining( t );
 		}
+		return req;
 	}
 	// add an existing requirement
-	public void addReq( Requirement req ) {
+	public Requirement addReq( Requirement req ) {
 		lorq.add( req );
+		return req;
 	}
 	// STORYCARD: Add a staff and its skills and training
-	public void addStaff( String stName, String[] skillNames, String[] trainingNames ) {
+	public Staff addStaff( String stName, String[] skillNames, String[] trainingNames ) {
 		Staff st = lost.get_or_create( stName );
 		// add all skills
 		for( String s : skillNames ) {
@@ -50,10 +52,12 @@ public class SRManagement {
 		for( String t : trainingNames ) {
 			st.addTraining( t );
 		}
+		return st;
 	}
 	// add an existing staff
-	public void addStaff( Staff st ) {
+	public Staff addStaff( Staff st ) {
 		lost.add( st );
+		return st;
 	}
 
 	@Override
@@ -63,7 +67,8 @@ public class SRManagement {
 				String.format( "| %-16s |", "Staff Name" ) +
 				String.format( " %-16s |", "Job Name" ) +
 				String.format( " %-16s |","Skills" ) +
-				String.format( " %-16s |\n","Job" ) +
+				String.format( " %-16s |\n","Pending Training" ) +
+				String.format( "-----------------------------------------------------------------------------\n" ) +
 				lost.print('\n') +
 				// print requirement header
 				"\n[ Requirement ]:\n" +
@@ -71,6 +76,7 @@ public class SRManagement {
 				String.format( " %-16s |","Teacher Name" ) +
 				String.format( " %-16s |","Skills Needed" ) +
 				String.format( " %-16s |\n","Trainging Needed" ) +
+				String.format( "-----------------------------------------------------------------------------\n" ) +
 				lorq.print('\n');
 	}
 }

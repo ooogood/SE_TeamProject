@@ -43,11 +43,13 @@ public class PTT2TxtLoader extends SRManagement implements PTTLoader {
 				String[] trainings = getListFromAttribute(object[3]);
 				//Adding Staff block
 				if(isStaff){
+					Requirement job = null;
+					Staff st = addStaff( object[0], skills, trainings);
 					//Adding job as requirement
 					if(object[1] != null){
-						addReq(object[1], skills, trainings);
+						job = addReq(object[1], new String[]{}, new String[]{});
+						job.setTeacher( st );
 					}
-					addStaff( object[0], skills, trainings);
 				}
 				//Adding a Requirement
 				else{
