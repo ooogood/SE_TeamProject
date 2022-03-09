@@ -6,9 +6,7 @@ package pttsystem;
 
 public interface PTTLoader {
 	public void startLoading();
-	public Staff loadStaff();
-	public boolean hasNextStaff();
-	public Requirement loadRequirement();
-	public boolean hasNextRequirement();
+	public Lox<Staff> getStaffs();
+	public Lox<Requirement> getRequirements();
 	public void endLoading();
 }

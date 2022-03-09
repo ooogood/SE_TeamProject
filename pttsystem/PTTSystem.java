@@ -61,12 +61,14 @@ public class PTTSystem extends SRManagement {
 		PTTLoader ld = slfactory.getLoader();
 		ld.startLoading();
 		// loading all staffs
-		while( ld.hasNextStaff() ) {
-			addStaff( ld.loadStaff() );
+		Lox<Staff>.Iterator stIt = ld.getStaffs().getIter();
+		while( stIt.hasNext() ) {
+			this.addStaff(stIt.next());
 		}
 		// loading all requirements
-		while( ld.hasNextRequirement() ) {
-			addReq( ld.loadRequirement() );
+		Lox<Requirement>.Iterator rqIt = ld.getRequirements().getIter();
+		while( rqIt.hasNext() ) {
+			this.addReq(rqIt.next());
 		}
 		ld.endLoading();
 	}

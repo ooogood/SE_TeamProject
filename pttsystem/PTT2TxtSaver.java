@@ -1,12 +1,10 @@
 package pttsystem;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.BufferedWriter;
 
 public class PTT2TxtSaver implements PTTSaver {
-	String filename = "FileName.txt";
+	String filename = "data.txt";
 	FileWriter fw;
-	BufferedWriter output;
 	boolean bSavingStaff = true;
 	// open a txt file to write
 	public void startSaving() {
