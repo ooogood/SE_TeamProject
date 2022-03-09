@@ -1,0 +1,9 @@
+Jim,English Class,{English,Language Teaching,},{English Class Training,}
+Jane,Spanish Class,{Spanish,Language Teaching,},{Spanish Class Training,}
+Joe,,{Calculus,Language Teaching,},{}
+Jay,Calculus Class,{Calculus,Math Teaching,},{Calculus Class Training,}
+
+English Class,Jim,{English,Language Teaching,},{English Class Training,}
+Spanish Class,Jane,{Spanish,Language Teaching,},{Spanish Class Training,}
+Calculus Class,Jay,{Calculus,Math Teaching,},{Calculus Class Training,}
+Geometry Class,,{Geometry,Math Teaching,},{Geometry Class Training,}
