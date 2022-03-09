@@ -1,10 +1,18 @@
 package pttsystem;
 
+/**
+ * This class implements the abstract save, load factory.
+ */
 public class PTT2TxtKit implements PTTSLFactory { 
+	private final String dataFile = "data.txt";
 	public PTTLoader getLoader() {
-		return new PTT2TxtLoader();
+		PTT2TxtLoader pttl = new PTT2TxtLoader();
+		pttl.setDataFile( dataFile );
+		return pttl;
 	}
 	public PTTSaver getSaver() {
-		return new PTT2TxtSaver();
+		PTT2TxtSaver ptts = new PTT2TxtSaver();
+		ptts.setDataFile( dataFile );
+		return ptts;
 	}
 }

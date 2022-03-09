@@ -12,12 +12,17 @@ import java.util.regex.Pattern;
 /**
  * This is the loader in PTT2Txt kit.
  * It extends SRManagement so that it can read txt at once and use itself as a buffer.
+ * It reads all data in the file when startLoading is called
+ * 	and save them all in its lost, lorq.
  */
 
 public class PTT2TxtLoader extends SRManagement implements PTTLoader {
-	String filename = "data.txt";
+	String filename;
 	BufferedReader objReader;
 
+	public void setDataFile( String s ) {
+		filename = s;
+	}
 	public void startLoading() {
 		try {
 			FileReader file = new FileReader(filename);

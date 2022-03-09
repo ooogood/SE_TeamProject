@@ -2,10 +2,19 @@ package pttsystem;
 import java.io.FileWriter;
 import java.io.IOException;
 
+/**
+ * This is the saver in PTT2Txt kit.
+ * It opens a file when startSaving is called,
+ *  write staffs and requirements into the file
+ *  and then close the file when endSaving is called.
+ */
 public class PTT2TxtSaver implements PTTSaver {
-	String filename = "data.txt";
+	String filename;
 	FileWriter fw;
 	boolean bSavingStaff = true;
+	public void setDataFile( String s ) {
+		filename = s;
+	}
 	// open a txt file to write
 	public void startSaving() {
 		try {

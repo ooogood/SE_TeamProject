@@ -1,7 +1,10 @@
 import java.util.Scanner;
 
 import pttsystem.PTTSystem;
-
+/**
+ * This is the View of our MVC pattern.
+ * It handles all the views of this system.
+ */
 public class View {
 
     private Scanner sc;

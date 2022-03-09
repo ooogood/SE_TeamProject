@@ -3,7 +3,10 @@ import java.util.HashMap;
 
 import pttsystem.PTTSystem;
 import pttsystem.PTT2TxtKit;
-
+/**
+ * This is the controller of our MVC pattern.
+ * It controls the process flow of View and PTTSystem.
+ */
 public class Controller {
     
     private PTTSystem ptt;
